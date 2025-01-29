@@ -162,6 +162,13 @@ PROMPT_TEMPLATES = {
         "\n\n",
     ),
     "numina": ("### Problem: {input}\n### Solution:", " {output}", "\n\n"),
+    "qwen25-boxed": (
+        "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n"
+        "<|im_start|>user\n{input}\nPlease reason step by step, and put your final answer within \\boxed{{}}.<|im_end|>\n"
+        "<|im_start|>assistant\n",
+        "{output}",
+        "\n\n",
+    ),
 }
 
 
@@ -236,7 +243,6 @@ Here are some examples you may refer to:
 """
             + full_prompt
         )
-
     return full_prompt.strip(" ")  # important!
 
 

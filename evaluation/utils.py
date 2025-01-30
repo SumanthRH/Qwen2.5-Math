@@ -169,6 +169,19 @@ PROMPT_TEMPLATES = {
         "{output}",
         "\n\n",
     ),
+    "gemma-cot": (
+        "<bos><start_of_turn>user\n{input}\nPlease reason step by step, and put your final answer within \\boxed{{}}.<end_of_turn>\n"
+        "<start_of_turn>model\n",
+        "{output}",
+        "\n\n"
+    ),
+    "llama-3.1-cot": (
+        "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful assistant.\n\n<|eot_id|>"
+        "<|start_header_id|>user<|end_header_id|>\n\n{input}<|eot_id|>"
+        "<|start_header_id|>assistant<|end_header_id|>\n\n",
+        "{output}",
+        "\n\n\n"
+    )
 }
 
 

@@ -177,11 +177,18 @@ PROMPT_TEMPLATES = {
     ),
     "llama-3.1-cot": (
         "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful assistant.\n\n<|eot_id|>"
-        "<|start_header_id|>user<|end_header_id|>\n\n{input}<|eot_id|>"
+        "<|start_header_id|>user<|end_header_id|>\n\n{input}\nPlease reason step by step, and put your final answer within \\boxed{{}}.<|eot_id|>"
         "<|start_header_id|>assistant<|end_header_id|>\n\n",
         "{output}",
         "\n\n\n"
-    )
+    ),
+    "llama-3.1-base-cot": (
+        "<|begin_of_text|>"
+        "{input}\nPlease reason step by step, and put your final answer within \\boxed{{}}.\nAnswer: ",
+        "{output}",
+        "\n\n"
+    ),
+
 }
 
 

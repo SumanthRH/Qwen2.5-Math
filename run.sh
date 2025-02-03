@@ -22,7 +22,7 @@ python3 -u math_eval.py \
     --n_sampling 1 \
     --top_p 1 \
     --start 0 \
-    --end -1 \
+    --end 10 \
     --use_vllm \
     --save_outputs \
     --overwrite 
@@ -45,7 +45,7 @@ python3 -u math_eval.py \
     --n_sampling 1 \
     --top_p 1 \
     --start 0 \
-    --end -1 \
+    --end 10 \
     --use_vllm \
     --save_outputs \
     --overwrite 

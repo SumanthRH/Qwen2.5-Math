@@ -7,8 +7,8 @@ OUTPUT_DIR=${MODEL_NAME_OR_PATH}/math_eval
 SPLIT="test"
 NUM_TEST_SAMPLE=-1
 
-# English open datasets
-DATA_NAME="olympiadbench"
+# # English open datasets
+DATA_NAME="math,math500,olympiadbench"
 TOKENIZERS_PARALLELISM=false \
 python3 -u math_eval.py \
     --model_name_or_path ${MODEL_NAME_OR_PATH} \
@@ -22,16 +22,17 @@ python3 -u math_eval.py \
     --n_sampling 1 \
     --top_p 1 \
     --start 0 \
-    --end 10 \
+    --end -1 \
     --use_vllm \
     --save_outputs \
-    --overwrite 
+    --overwrite \
+    --max_tokens_per_call 32768
 
 
 
 
-# English competition datasets
-DATA_NAME="aime24"
+# # English competition datasets
+DATA_NAME="amc23,aime24"
 TOKENIZERS_PARALLELISM=false \
 python3 -u math_eval.py \
     --model_name_or_path ${MODEL_NAME_OR_PATH} \
@@ -45,7 +46,8 @@ python3 -u math_eval.py \
     --n_sampling 1 \
     --top_p 1 \
     --start 0 \
-    --end 10 \
+    --end -1 \
     --use_vllm \
     --save_outputs \
-    --overwrite 
+    --overwrite \
+    --max_tokens_per_call 32768

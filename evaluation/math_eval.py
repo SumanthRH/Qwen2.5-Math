@@ -77,7 +77,7 @@ def prepare_data(data_name, args):
     # get out_file name
     dt_string = datetime.now().strftime("%m-%d_%H-%M")
     model_name = "/".join(args.model_name_or_path.split("/")[-2:])
-    out_file_prefix = f"{args.split}_{args.prompt_type}_{args.num_test_sample}_seed{args.seed}_t{args.temperature}"
+    out_file_prefix = f"{args.split}_{args.prompt_type}_{args.num_test_sample}_seed{args.seed}_t{args.temperature}_n{args.n_sampling}"
     output_dir = args.output_dir
     if not os.path.exists(output_dir):
         output_dir = f"outputs/{output_dir}"
@@ -114,6 +114,7 @@ def setup(args):
             tensor_parallel_size=len(available_gpus) // args.pipeline_parallel_size,
             pipeline_parallel_size=args.pipeline_parallel_size,
             trust_remote_code=True,
+            dtype=torch.float32,
         )
         tokenizer = None
         if args.apply_chat_template:
@@ -355,6 +356,7 @@ def main(llm, tokenizer, data_name, args):
         result = results[i * args.n_sampling : (i + 1) * args.n_sampling]
         preds = [item[0] for item in result]
         reports = [item[1] for item in result]
+        outputs = [item[2] for item in result]
         for j in range(len(preds)):
             if sample["gt"] in ["A", "B", "C", "D", "E"] and preds[j] not in [
                 "A",
@@ -371,7 +373,7 @@ def main(llm, tokenizer, data_name, args):
                 )
 
         sample.pop("prompt")
-        sample.update({"code": code, "pred": preds, "report": reports})
+        sample.update({"code": code, "pred": preds, "report": reports, "outputs": outputs})
         all_samples.append(sample)
 
     # add processed samples

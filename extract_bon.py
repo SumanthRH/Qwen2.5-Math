@@ -47,10 +47,10 @@ while k > 0:
     for sample in data:
         # calculate pass @ k 
         num_correct = np.sum(sample["score"])
-        pass_k = 1 - (math.comb(N - num_correct, k) / math.comb(N, k))
-        # pass_k = pass_at_k(N, num_correct, k)
+        # pass_k = 1 - (math.comb(N - num_correct, k) / math.comb(N, k))
+        pass_k = pass_at_k(N, num_correct, k)
         new_scores.append(pass_k)
-    final_bon_scores[k] = round(np.mean(new_scores)*100, 3)
+    final_bon_scores[k] = round(float(np.mean(new_scores))*100, 3)
     k = k // 2
 
 print(f"Final pass @ k for {args.path}:")
